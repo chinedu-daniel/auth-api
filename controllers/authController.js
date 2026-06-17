@@ -82,7 +82,7 @@ async function loginUser(req, res) {
 }
 
 function getProfile(req, res) {
-    res,json({
+    res.json({
         message: "Welcome",
 
         user:req.user
