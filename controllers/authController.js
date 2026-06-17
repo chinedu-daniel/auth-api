@@ -81,16 +81,7 @@ async function loginUser(req, res) {
     }
 }
 
-function getProfile(req, res) {
-    res.json({
-        message: "Welcome",
-
-        user:req.user
-    });
-}
-
 module.exports = {
     registerUser,
     loginUser,
-    getProfile
 };
