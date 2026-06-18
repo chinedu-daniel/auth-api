@@ -1,4 +1,5 @@
 const { getDB } = require("../config/db");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 async function registerUser(req, res){
@@ -71,9 +72,17 @@ async function loginUser(req, res) {
             });
         }
 
+        const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "1m"}
+        );
+
         res.status(200).json({
-            message: "Login successful"
+            message: "Login successful",
+            token: token
         });
+
     } catch (error) {
         res.status(500).json({
             message: "Server error"
