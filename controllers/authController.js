@@ -32,7 +32,8 @@ async function registerUser(req, res){
         const result = await users.insertOne({
             name,
             email,
-            password:hashedPassword
+            password:hashedPassword,
+            role: "user"
         });
 
         // Response
@@ -73,9 +74,13 @@ async function loginUser(req, res) {
         }
 
         const token = jwt.sign(
-            { userId: user._id },
+            {
+                userId: user._id,
+                email: user.email,
+                role: user.role
+            },
             process.env.JWT_SECRET,
-            { expiresIn: "1m"}
+            { expiresIn: "10m"}
         );
 
         res.status(200).json({
