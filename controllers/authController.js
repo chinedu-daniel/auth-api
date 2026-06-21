@@ -1,6 +1,7 @@
 const { getDB } = require("../config/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const logger = require("../config/logger");
 
 const authService = require("../services/authServices");
 
